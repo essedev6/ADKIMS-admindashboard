@@ -1,72 +1,34 @@
 {
-  "name": "admin-dashboard",
-  "private": true,
-  "version": "0.0.0",
-  "main": "main.js",
+  "name": "adkims-admin-dashboard",
+  "version": "1.0.0",
+  "description": "Admin dashboard for ADKIMS billing system",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "electron-dev": "electron .",
-    "electron-build": "next build && electron-builder"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "1.7.18",
     "@heroicons/react": "2.1.1",
-    "electron-is-dev": "^2.0.0",
     "mongoose": "^8.19.0",
     "next": "14.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.6.0",
     "recharts": "2.12.1",
-    "socket.io-client": "4.7.4"
+    "socket.io-client": "4.7.4",
+    "framer-motion": "^10.16.4"
   },
   "devDependencies": {
     "@types/node": "20.11.19",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
-    "@typescript-eslint/eslint-plugin": "6.21.0",
-    "@typescript-eslint/parser": "6.21.0",
-    "@vitejs/plugin-react": "^5.0.2",
     "autoprefixer": "10.4.17",
-    "electron": "28.2.0",
-    "electron-builder": "24.9.1",
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
-    "eslint-plugin-react-hooks": "4.6.0",
     "postcss": "8.4.35",
     "tailwindcss": "3.4.1",
-    "typescript": "5.3.3",
-    "vite": "^7.1.5"
-  },
-  "build": {
-    "appId": "com.adkims.admin-dashboard",
-    "productName": "Admin Dashboard",
-    "mac": {
-      "category": "public.app-category.business"
-    },
-    "win": {
-      "target": [
-        "nsis"
-      ]
-    },
-    "files": [
-      "**/*",
-      "!**/*.ts",
-      "!*.code-workspace",
-      "!LICENSE.md",
-      "!package.json",
-      "!package-lock.json",
-      "!src/",
-      "!e2e/",
-      "!hooks/",
-      "!.env",
-      "!readme.md"
-    ],
-    "directories": {
-      "buildResources": "resources"
-    }
+    "typescript": "5.3.3"
   }
 }
