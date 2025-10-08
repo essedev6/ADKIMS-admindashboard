@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020817;
+  --card-bg: rgba(15, 23, 41, 0.6);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: white;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 41, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* Utility classes */
+.backdrop-blur-card {
+  @apply bg-[#0f1729]/60 backdrop-blur-xl rounded-2xl border border-blue-500/20;
+}
+
+.nav-button {
+  @apply w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all;
+}
+
+.nav-button-active {
+  @apply bg-blue-500/20 text-blue-400;
+}
+
+.nav-button-inactive {
+  @apply hover:bg-blue-500/10 text-gray-400 hover:text-blue-400;
+}
+
+/* Chart styles */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  @apply stroke-blue-500/20;
+}
+
+.recharts-tooltip-wrapper {
+  @apply !border-blue-500/20 !rounded-xl;
+}
+
+/* Form styles */
+input::placeholder {
+  @apply text-gray-500;
+}
+
+/* Status badges */
+.status-badge {
+  @apply px-2 py-0.5 text-xs rounded-full font-medium;
+}
+
+.status-badge-active {
+  @apply bg-green-500/20 text-green-400;
+}
+
+.status-badge-inactive {
+  @apply bg-red-500/20 text-red-400;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-lg transition-colors font-medium;
+}
+
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+}
+
+.btn-secondary {
+  @apply bg-blue-500/20 hover:bg-blue-500/30 text-blue-400;
+}
+
+.btn-danger {
+  @apply bg-red-500/20 hover:bg-red-500/30 text-red-400;
+}

@@ -1,0 +1,46 @@
+# Create a comprehensive .gitignore
+@"
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Production
+/build
+/dist
+
+# Next.js
+/.next/
+/out/
+
+# Tauri - EXCLUDE COMPLETELY
+/src-tauri/
+
+# Debug files
+*.log
+*.tmp
+*.temp
+
+# Environment variables
+.env
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files that shouldn't be committed
+*.rlib
+*.rmeta
+*.dll
+*.pdb
+/target/
+/debug/
+/release/
+"@ | Out-File -FilePath .gitignore -Encoding UTF8
