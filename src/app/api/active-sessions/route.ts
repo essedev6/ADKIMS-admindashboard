@@ -12,7 +12,6 @@ export async function GET() {
     
     const db = client.connection.db;
     
-    // Only fetch payments with status 'completed'
     const payments = await db.collection("payments")
       .find({ 
         status: 'completed'

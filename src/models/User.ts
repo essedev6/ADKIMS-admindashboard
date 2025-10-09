@@ -5,4 +5,12 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
 });
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+let User;
+
+if (mongoose.models.User) {
+  User = mongoose.models.User;
+} else {
+  User = mongoose.model('User', UserSchema);
+}
+
+export default User;
