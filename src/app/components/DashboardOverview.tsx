@@ -76,7 +76,7 @@ const DashboardOverview: React.FC = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/payment/dashboard-data');
+        const response = await fetch('https://adkims-backend-service.onrender.com/api/payment/dashboard-data');
         const data = await response.json();
         console.log('Fetched dashboard data:', data);
         setDashboardData(data);

@@ -8,7 +8,9 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
 });
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+// Fix: Use type assertion to resolve the complex union type error
+const User = (mongoose.models.User as mongoose.Model<any>) || 
+  mongoose.model('User', UserSchema);
 
 export async function GET() {
   try {
