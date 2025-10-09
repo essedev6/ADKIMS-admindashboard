@@ -6,6 +6,7 @@
     },
     {
       "path": "./tsconfig.node.json"
+
     }
   ],
   "compilerOptions": {
@@ -29,7 +30,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",

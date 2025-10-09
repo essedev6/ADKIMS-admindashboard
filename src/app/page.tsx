@@ -6,6 +6,7 @@ import { ChartBarIcon, UsersIcon, CreditCardIcon, Cog6ToothIcon, ArrowRightOnRec
 import UserManagement from './components/UserManagement';
 import PlanManagement from './components/PlanManagement';
 import Settings from './components/Settings';
+import LoadingScreen from './components/loadingScreen';
 import SessionLogs from './components/SessionLogs';
 import RealtimeSessions from './components/RealtimeSessions';
 import ActiveSessionsTable from './components/ActiveSessionsTable';
@@ -80,7 +81,15 @@ export default function Home() {
   const [userData, setUserData] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isConnected } = useWebSocket();
+   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
+   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -126,7 +135,7 @@ export default function Home() {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key && key.startsWith('auth_') || key === 'token' || key === 'user') {
-          keysToRemove.push(key);
+          (keysToRemove as string[]).push(key as string);
         }
       }
       
@@ -180,6 +189,11 @@ export default function Home() {
     }
     return 'Admin';
   };
+
+    if (isLoading) {
+    return <LoadingScreen />;
+  };
+
 
   return (
     <div className="min-h-screen bg-[#020817] text-white">

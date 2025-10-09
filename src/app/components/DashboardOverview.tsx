@@ -138,7 +138,7 @@ const DashboardOverview: React.FC = () => {
           value={`KES ${(dashboardData.totalRevenue || 0).toLocaleString()}`}
           icon={CreditCardIcon}
           bgColor="bg-gradient-to-r from-blue-800 to-blue-600"
-          textColor="text-white"
+         
         />
         <MetricCard
           title="Total Transactions"

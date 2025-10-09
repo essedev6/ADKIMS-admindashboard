@@ -13,14 +13,27 @@ const User = mongoose.models.User || mongoose.model('User', UserSchema);
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.connection.db; // Access the database from the mongoose connection
-    const payments = await db.collection("payments").find({}).sort({ createdAt: -1 }).toArray();
+    
+    // FIX: Check if database connection exists and get db properly
+    if (!client.connection || !client.connection.db) {
+      throw new Error('Database connection not available');
+    }
+    
+    const db = client.connection.db; // Now TypeScript knows this is defined
+    
+    // Only fetch payments with status 'completed'
+    const payments = await db.collection("payments")
+      .find({ 
+        status: 'completed'  // Only get successful payments
+      })
+      .sort({ createdAt: -1 })
+      .toArray();
 
     const planDurations: { [key: number]: number } = {
       5: 30 * 60 * 1000, // 30 minutes in milliseconds
-      10: 2 * 60 * 60 * 1000, // 3 hours in milliseconds
-      20: 4 * 60 * 60 * 1000, // 7 hours in milliseconds
-      30: 7 * 60 * 60 * 1000, // 12 hours in milliseconds
+      10: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+      20: 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+      30: 7 * 60 * 60 * 1000, // 7 hours in milliseconds
       75: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
       130: 3 * 24 * 60 * 60 * 1000, // 3 days in milliseconds
       375: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
@@ -38,6 +51,7 @@ export async function GET() {
       const expiryTime = new Date(paymentDate.getTime() + duration);
       const currentTime = new Date();
 
+      // Only include sessions that are still active (not expired)
       if (expiryTime > currentTime) {
         const remainingTime = expiryTime.getTime() - currentTime.getTime();
 
@@ -53,9 +67,11 @@ export async function GET() {
           paymentDateTime: payment.createdAt,
           expiryTime: expiryTime.toISOString(),
           remainingTime: remainingTime, // This will be in milliseconds, convert to readable format later
+          // ADDED: Include payment status for clarity
+          status: payment.status
         };
       }
-      return null;
+      return null; // Skip expired sessions
     }));
 
     const filteredActiveSessions = activeSessions.filter(session => session !== null);
